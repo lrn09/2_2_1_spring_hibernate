@@ -9,9 +9,8 @@ import java.util.Objects;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "model")
     private String model;
@@ -19,26 +18,25 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     private User user;
 
+    public Car() {
+
+    }
 
     public Car(String model, int series) {
         this.model = model;
         this.series = series;
     }
 
-    public Car() {
-
-    }
-
     public Long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getModel() {
@@ -55,6 +53,14 @@ public class Car {
 
     public void setSeries(int series) {
         this.series = series;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

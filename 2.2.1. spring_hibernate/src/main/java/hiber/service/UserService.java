@@ -1,8 +1,6 @@
 package hiber.service;
 
-import hiber.model.Car;
 import hiber.model.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,5 +9,5 @@ public interface UserService {
 
     List<User> listUsers();
 
-    public User getUserByCarModelAndSeries(String model, int series);
+    User getUserByCarModelAndSeries(String model, int series);
 }

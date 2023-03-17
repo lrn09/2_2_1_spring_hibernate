@@ -20,9 +20,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-   @OneToOne
-   @JoinColumn(name = "car_id")
-   private Car car;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Car car;
 
     public User() {
     }
@@ -71,20 +71,21 @@ public class User {
 
     public void setCar(Car car) {
         this.car = car;
+        this.car.setUser(this);
     }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof User)) return false;
-      User user = (User) o;
-      return getId().equals(user.getId()) && getEmail().equals(user.getEmail());
-   }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId().equals(user.getId()) && getEmail().equals(user.getEmail());
+    }
 
-   @Override
-   public int hashCode() {
-      return Objects.hash(getId(), getEmail());
-   }
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail());
+    }
 
     @Override
     public String toString() {
